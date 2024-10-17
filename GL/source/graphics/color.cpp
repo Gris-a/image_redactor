@@ -3,25 +3,25 @@
 namespace GL
 {
 
-Color::Color(unsigned red, unsigned green, unsigned blue, unsigned alpha): red_(red), green_(green), blue_(blue), alpha_(alpha) {}
+Color::Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha): red_(red), green_(green), blue_(blue), alpha_(alpha) {}
 
-unsigned Color::red()   const {return red_;}
-unsigned Color::green() const {return green_;}
-unsigned Color::blue()  const {return blue_;}
-unsigned Color::alpha() const {return alpha_;}
+uint8_t Color::red()   const {return red_;}
+uint8_t Color::green() const {return green_;}
+uint8_t Color::blue()  const {return blue_;}
+uint8_t Color::alpha() const {return alpha_;}
 
 
-void Color::set_red(unsigned red)     {red_   = red;}
-void Color::set_green(unsigned green) {green_ = green;}
-void Color::set_blue(unsigned blue)   {blue_  = blue;}
-void Color::set_alpha(unsigned alpha) {alpha_ = alpha;}
+void Color::set_red(uint8_t red)     {red_   = red;}
+void Color::set_green(uint8_t green) {green_ = green;}
+void Color::set_blue(uint8_t blue)   {blue_  = blue;}
+void Color::set_alpha(uint8_t alpha) {alpha_ = alpha;}
 
 
 Color &Color::operator +=(const Color &diff)
 {
-    red_   = std::min(COLOR_MAX, red_   + diff.red_);
-    green_ = std::min(COLOR_MAX, green_ + diff.green_);
-    blue_  = std::min(COLOR_MAX, blue_  + diff.blue_);
+    red_   = std::min(COLOR_MAX, static_cast<unsigned>(red_   + diff.red_));
+    green_ = std::min(COLOR_MAX, static_cast<unsigned>(green_ + diff.green_));
+    blue_  = std::min(COLOR_MAX, static_cast<unsigned>(blue_  + diff.blue_));
     alpha_ = std::max(alpha_, diff.alpha_);
 
     return *this;

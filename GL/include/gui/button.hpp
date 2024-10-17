@@ -49,9 +49,10 @@ protected:
     virtual void on_release();
     virtual void on_hold();
 
-    virtual void draw(BaseWindow &base_window, const Vector2d &base) = 0;
-    virtual void handle_event(const Event &event, BaseWindow &base_window, const Vector2d &base) override;
-    virtual bool is_hovered(BaseWindow &base_window, const Vector2d &base) = 0;
+    virtual void draw(BaseWindow &base_window) = 0;
+    virtual void update(const Event &event, BaseWindow &base_window) override final;
+
+    virtual bool is_hovered(BaseWindow &base_window) = 0;
 
     void add_action(std::vector<std::unique_ptr<Action>> &actions, std::unique_ptr<Action> &&action);
 
@@ -71,11 +72,11 @@ public:
 class HoldButton: public Button
 {
 protected:
-    std::chrono::time_point<std::chrono::steady_clock>
-    time_ = std::chrono::steady_clock::now();
+    std::chrono::time_point<std::chrono::system_clock>
+    time_ = std::chrono::system_clock::now();
 
-    virtual void on_press() override;
-    virtual void on_hold()  override;
+    virtual void on_press() override final;
+    virtual void on_hold()  override final;
 
 public:
     HoldButton(const Dot2d &pos, const Vector2d &size);
@@ -87,7 +88,7 @@ class ActivationButton: public Button
 protected:
     bool is_active_ = false;
 
-    virtual void on_release() override;
+    virtual void on_release() override final;
 
 public:
     ActivationButton(const Dot2d &pos, const Vector2d &size);
@@ -99,31 +100,32 @@ public:
 class BasicHoldButton: public HoldButton
 {
 protected:
-    const Texture *default_texture_;
-    const Texture *hovered_texture_;
-    const Texture *pressed_texture_;
+    std::shared_ptr<const Texture> default_texture_;
+    std::shared_ptr<const Texture> hovered_texture_;
+    std::shared_ptr<const Texture> pressed_texture_;
 
-    virtual void draw(BaseWindow &base_window, const Vector2d &base) override;
-    virtual bool is_hovered(BaseWindow &base_window, const Vector2d &base) override;
+    virtual void draw(BaseWindow &base_window) override final;
+    virtual bool is_hovered(BaseWindow &base_window) override final;
+
 public:
     BasicHoldButton(const Dot2d &pos, const Vector2d &size,
-                    const Texture *default_texture, const Texture *hovered_texture, const Texture *pressed_texture);
+                    std::shared_ptr<const Texture> &default_texture, std::shared_ptr<const Texture> &hovered_texture, std::shared_ptr<const Texture> &pressed_texture);
 };
 
 
 class BasicActivationButton: public ActivationButton
 {
 protected:
-    const Texture *default_texture_;
-    const Texture *hovered_texture_;
-    const Texture *pressed_texture_;
+    std::shared_ptr<const Texture> default_texture_;
+    std::shared_ptr<const Texture> hovered_texture_;
+    std::shared_ptr<const Texture> pressed_texture_;
 
-    virtual void draw(BaseWindow &base_window, const Vector2d &base) override;
-    virtual bool is_hovered(BaseWindow &base_window, const Vector2d &base) override;
+    virtual void draw(BaseWindow &base_window) override final;
+    virtual bool is_hovered(BaseWindow &base_window) override final;
 
 public:
     BasicActivationButton(const Dot2d &pos, const Vector2d &size,
-                          const Texture *default_texture, const Texture *hovered_texture, const Texture *pressed_texture);
+                          std::shared_ptr<const Texture> &default_texture, std::shared_ptr<const Texture> &hovered_texture, std::shared_ptr<const Texture> &pressed_texture);
 };
 
 }; // namespace GL

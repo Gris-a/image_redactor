@@ -24,9 +24,10 @@ protected:
     Dot2d pos_;
     Vector2d size_;
 
-    virtual void draw(BaseWindow &base_window, const Vector2d &base) = 0; // TODO pass drawing region
-    virtual void handle_event(const Event &event, BaseWindow &base_window, const Vector2d &base) = 0;
-    virtual bool is_hovered(BaseWindow &base_window, const Vector2d &base);
+    virtual void draw(BaseWindow &base_window)                       = 0; // TODO pass drawing region
+    virtual void update(const Event &event, BaseWindow &base_window) = 0;
+
+    virtual bool is_hovered(BaseWindow &base_window);
 
 public:
     Window(const Dot2d pos, const Vector2d &size);
@@ -34,6 +35,9 @@ public:
 
     Vector2d pos()  const;
     Vector2d size() const;
+
+    Dot2d get_rel_coords(const Dot2d &abs_coords) const;
+    Dot2d get_abs_coords(const Dot2d &rel_coords) const;
 };
 
 
@@ -44,8 +48,8 @@ class WindowManager: public Window
 protected:
     std::vector<std::unique_ptr<Window>> windows_;
 
-    virtual void draw(BaseWindow &base_window, const Vector2d &base) override;
-    virtual void handle_event(const Event &event, BaseWindow &base_window, const Vector2d &base) override;
+    virtual void draw(BaseWindow &base_window) override final;
+    virtual void update(const Event &event, BaseWindow &base_window) override final;
 
 public:
     WindowManager(const Dot2d pos, const Vector2d &size);
@@ -69,13 +73,15 @@ public:
     bool is_open() const;
 
     void close();
-    void handle_events();
+    virtual void proceed_close_event();
+
+    void update();
 
     void clear();
     void display();
 
     void draw();
-    void draw_sprite(const Sprite &sprite); // TODO draw primitives
+    void draw_sprite(const Sprite &sprite);
 };
 
 }; // namespace GL

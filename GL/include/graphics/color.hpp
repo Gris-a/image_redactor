@@ -15,21 +15,21 @@ public:
     static const unsigned COLOR_MAX = 255;
 
 private:
-    unsigned red_ = 0, green_ = 0, blue_ = 0, alpha_ = COLOR_MAX;
+    uint8_t red_ = 0, green_ = 0, blue_ = 0, alpha_ = COLOR_MAX;
 
 public:
     Color() = default;
-    Color(unsigned red, unsigned green, unsigned blue, unsigned alpha);
+    Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
 
-    unsigned red()   const;
-    unsigned green() const;
-    unsigned blue()  const;
-    unsigned alpha() const;
+    uint8_t red()   const;
+    uint8_t green() const;
+    uint8_t blue()  const;
+    uint8_t alpha() const;
 
-    void set_red(unsigned red);
-    void set_green(unsigned green);
-    void set_blue(unsigned blue);
-    void set_alpha(unsigned alpha);
+    void set_red(uint8_t red);
+    void set_green(uint8_t green);
+    void set_blue(uint8_t blue);
+    void set_alpha(uint8_t alpha);
 
 
     Color &operator +=(const Color &diff);

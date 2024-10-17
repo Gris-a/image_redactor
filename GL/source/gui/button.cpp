@@ -39,11 +39,11 @@ void Button::on_release()
 }
 
 
-void Button::handle_event(const Event &event, BaseWindow &base_window, const Vector2d &base)
+void Button::update(const Event &event, BaseWindow &base_window)
 {
     on_default();
 
-    if(!is_hovered(base_window, base))
+    if(!is_hovered(base_window))
     {
         switch(state_)
         {

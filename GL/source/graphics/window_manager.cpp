@@ -12,22 +12,20 @@ void WindowManager::add_window(std::unique_ptr<Window> &&window)
 }
 
 
-void WindowManager::handle_event(const Event &event, BaseWindow &base_window, const Vector2d &base)
+void WindowManager::update(const Event &event, BaseWindow &base_window)
 {
-    Vector2d base_offset = base + pos_;
     for(std::unique_ptr<Window> &window: windows_)
     {
-        window->handle_event(event, base_window, base_offset);
+        window->update(event, base_window);
     }
 }
 
 
-void WindowManager::draw(BaseWindow &base_window, const Vector2d &base)
+void WindowManager::draw(BaseWindow &base_window)
 {
-    Vector2d base_offset = base + pos_;
     for(std::unique_ptr<Window> &window: windows_)
     {
-        window->draw(base_window, base_offset);
+        window->draw(base_window);
     }
 }
 

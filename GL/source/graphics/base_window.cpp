@@ -30,6 +30,11 @@ void BaseWindow::close()
     sf::RenderWindow::close();
 }
 
+void BaseWindow::proceed_close_event()
+{
+    close();
+}
+
 
 void BaseWindow::clear()
 {
@@ -54,25 +59,25 @@ bool BaseWindow::poll_event(Event &event)
     return false;
 }
 
-void BaseWindow::handle_events()
+void BaseWindow::update()
 {
     Event event;
     while(poll_event(event))
     {
         if(event.type() == GL::Event::EventType::CLOSED)
         {
-            close();
+            proceed_close_event();
             return;
         }
-        WindowManager::handle_event(event, *this, pos_);
+        WindowManager::update(event, *this);
     }
-    WindowManager::handle_event(event, *this, pos_);
+    WindowManager::update(event, *this);
 }
 
 
 void BaseWindow::draw()
 {
-    WindowManager::draw(*this, pos_);
+    WindowManager::draw(*this);
 }
 
 void BaseWindow::draw_sprite(const Sprite &sprite)
