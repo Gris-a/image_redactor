@@ -41,29 +41,27 @@ public:
         KeyEvent(const sf::Event::KeyEvent &event): code(static_cast<Keyboard::Key>(event.code)), alt(event.alt), control(event.control), shift(event.shift) {}
     };
 
-    class MouseMoveEvent // TODO Vector2d not 2 int
+    class MouseMoveEvent
     {
         friend class Event;
 
     public:
-        int x;
-        int y;
+        Vector2d pos;
 
     private:
-        MouseMoveEvent(const sf::Event::MouseMoveEvent &event): x(event.x), y(event.y) {}
+        MouseMoveEvent(const sf::Event::MouseMoveEvent &event): pos(event.x, event.y) {}
     };
 
-    class MouseButtonEvent // TODO Vector2d not 2 int
+    class MouseButtonEvent
     {
         friend class Event;
 
     public:
         Mouse::Button button;
-        int           x;
-        int           y;
+        Vector2d pos;
 
     private:
-        MouseButtonEvent(const sf::Event::MouseButtonEvent &event): button(static_cast<Mouse::Button>(event.button)), x(event.x), y(event.y) {}
+        MouseButtonEvent(const sf::Event::MouseButtonEvent &event): button(static_cast<Mouse::Button>(event.button)), pos(event.x, event.y) {}
     };
 
     EventType type() const;

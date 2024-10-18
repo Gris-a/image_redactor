@@ -53,6 +53,7 @@ public:
     void set_texture(const RenderTexture &texture);
 
     void set_position(const Vector2d &pos);
+    void set_rotation(double angle);
 
     void set_size(const Vector2d &size);
     void set_scale(const Vector2d &scale);

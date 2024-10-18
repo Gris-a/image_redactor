@@ -114,20 +114,9 @@ public:
         F14,          ///< The F14 key
         F15,          ///< The F15 key
         Pause,        ///< The Pause key
-
-        KeyCount,     ///< Keep last -- the total number of keyboard keys
-
-        // Deprecated values:
-
-        Dash      = Hyphen,       ///< \deprecated Use Hyphen instead
-        BackSpace = Backspace,    ///< \deprecated Use Backspace instead
-        BackSlash = Backslash,    ///< \deprecated Use Backslash instead
-        SemiColon = Semicolon,    ///< \deprecated Use Semicolon instead
-        Return    = Enter         ///< \deprecated Use Enter instead
     };
 
     Keyboard() = delete;
-
     static bool is_key_pressed(Key key);
 };
 

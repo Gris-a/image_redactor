@@ -24,7 +24,7 @@ protected:
     Dot2d pos_;
     Vector2d size_;
 
-    virtual void draw(BaseWindow &base_window)                       = 0; // TODO pass drawing region
+    virtual void draw(BaseWindow &base_window)                       = 0;
     virtual void update(const Event &event, BaseWindow &base_window) = 0;
 
     virtual bool is_hovered(BaseWindow &base_window);

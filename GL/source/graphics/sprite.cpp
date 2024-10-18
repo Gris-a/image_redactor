@@ -19,6 +19,11 @@ void Sprite::set_position(const Vector2d &pos)
     sf::Sprite::setPosition(pos.x(), pos.y());
 }
 
+void Sprite::set_rotation(double angle)
+{
+    sf::Sprite::setRotation(angle);
+}
+
 
 void Sprite::set_size(const Vector2d &size)
 {
