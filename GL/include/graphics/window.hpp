@@ -11,6 +11,8 @@
 namespace GL
 {
 
+using wid_t = ssize_t;
+
 class Event;
 
 class Sprite;
@@ -22,7 +24,11 @@ class Window
 {
     friend class WindowManager;
 
+private:
+    static wid_t counter;
 protected:
+    wid_t id;
+
     Dot2d pos_;
     Vector2d size_;
 

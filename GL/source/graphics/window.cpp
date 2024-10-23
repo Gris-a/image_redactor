@@ -4,8 +4,9 @@
 
 namespace GL
 {
+wid_t Window::counter = 0;
 
-Window::Window(const Dot2d pos, const Vector2d &size): pos_(pos), size_(size) {}
+Window::Window(const Dot2d pos, const Vector2d &size): id(counter++), pos_(pos), size_(size) {if(counter == 0) [[unlikely]] throw std::exception();}
 
 
 Vector2d Window::pos()  const
