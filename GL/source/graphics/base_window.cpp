@@ -61,6 +61,8 @@ bool BaseWindow::poll_event(Event &event)
 
 void BaseWindow::update()
 {
+    if(!is_active_) return;
+
     Event event;
     while(poll_event(event))
     {

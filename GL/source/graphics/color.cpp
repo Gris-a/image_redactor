@@ -2,10 +2,16 @@
 
 namespace GL
 {
-
+Color::Color(): components_{0, 0, 0, 0} {}
 Color::Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha): components_{red, green, blue, alpha} {}
 Color::Color(const Color &color): color_(color.color_) {}
 Color::Color(uint32_t color): color_(color) {}
+
+Color &Color::operator =(const Color &other)
+{
+    components_ = other.components_;
+    return *this;
+}
 
 
 uint8_t Color::red()   const {return components_.red;}

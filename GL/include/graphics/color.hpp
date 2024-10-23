@@ -17,10 +17,10 @@ public:
 private:
     struct Components
     {
-        uint8_t red   = 0;
-        uint8_t green = 0;
-        uint8_t blue  = 0;
-        uint8_t alpha = COLOR_MAX;
+        uint8_t red;
+        uint8_t green;
+        uint8_t blue;
+        uint8_t alpha;
     };
     union
     {
@@ -29,10 +29,12 @@ private:
     };
 
 public:
-    Color() = default;
+    Color();
     Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
     Color(const Color &color);
     Color(uint32_t color);
+
+    Color &operator =(const Color &other);
 
     uint8_t red()   const;
     uint8_t green() const;

@@ -21,9 +21,12 @@ class Texture: protected sf::Texture
     friend class Sprite;
 
 public:
+    Texture() = default;
     Texture(const std::string &filename);
 
     bool create(const Vector2d &size);
+    void update(const Color *data);
+
     bool load_from_file(const std::string &filename);
 };
 

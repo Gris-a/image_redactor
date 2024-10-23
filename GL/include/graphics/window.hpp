@@ -28,6 +28,7 @@ private:
     static wid_t counter;
 protected:
     wid_t id;
+    bool is_active_ = true;
 
     Dot2d pos_;
     Vector2d size_;
@@ -43,6 +44,11 @@ public:
 
     Vector2d pos()  const;
     Vector2d size() const;
+
+    bool is_active();
+
+    void activate();
+    void disactivate();
 
     Dot2d get_rel_coords(const Dot2d &abs_coords) const;
     Dot2d get_abs_coords(const Dot2d &rel_coords) const;

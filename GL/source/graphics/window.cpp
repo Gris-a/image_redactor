@@ -19,6 +19,22 @@ Vector2d Window::size() const
     return size_;
 }
 
+
+bool Window::is_active()
+{
+    return is_active_;
+}
+
+void Window::activate()
+{
+    is_active_ = true;
+}
+
+void Window::disactivate()
+{
+    is_active_ = false;
+}
+
 bool Window::is_hovered(BaseWindow &base_window)
 {
     Vector2d mouse_pos = Mouse::get_position(base_window) - pos_;
