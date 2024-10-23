@@ -25,13 +25,6 @@ void Sprite::set_rotation(double angle)
 }
 
 
-void Sprite::set_size(const Vector2d &size)
-{
-    const sf::Texture *texture = sf::Sprite::getTexture();
-    sf::Vector2u texture_size = (*texture).getSize();
-    set_scale(Vector2d(size.x() / texture_size.x, size.y() / texture_size.y));
-}
-
 void Sprite::set_scale(const Vector2d &scale)
 {
     sf::Sprite::setScale(sf::Vector2f(scale.x(), scale.y()));

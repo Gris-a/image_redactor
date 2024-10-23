@@ -45,7 +45,7 @@ void BasicHoldButton::draw(BaseWindow &base_window)
 
     sprite.set_texture(*texture.get());
     sprite.set_position(pos_);
-    sprite.set_size(size_);
+    // sprite.set_size(size_); // TODO
 
     base_window.draw_sprite(sprite);
 }

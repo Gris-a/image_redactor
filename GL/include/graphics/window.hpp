@@ -12,7 +12,9 @@ namespace GL
 {
 
 class Event;
+
 class Sprite;
+class Text;
 
 class BaseWindow;
 
@@ -48,8 +50,11 @@ class WindowManager: public Window
 protected:
     std::vector<std::unique_ptr<Window>> windows_;
 
-    virtual void draw(BaseWindow &base_window) override final;
-    virtual void update(const Event &event, BaseWindow &base_window) override final;
+    virtual void draw_self(BaseWindow &base_window);
+    virtual void draw(BaseWindow &base_window) override;
+
+    virtual void update_self(const Event &event, BaseWindow &base_window);
+    virtual void update(const Event &event, BaseWindow &base_window) override;
 
 public:
     WindowManager(const Dot2d pos, const Vector2d &size);
@@ -61,11 +66,6 @@ class BaseWindow: protected sf::RenderWindow, public WindowManager
 {
     friend class Mouse;
 
-private:
-    bool poll_event(Event &event);
-
-protected:
-
 public:
     BaseWindow(const Vector2d &size, const std::string &title = "");
     BaseWindow(const Vector2d &size, const Vector2d &render_pos, const Vector2d &render_size, const std::string &title = "");
@@ -75,6 +75,7 @@ public:
     void close();
     virtual void proceed_close_event();
 
+    bool poll_event(Event &event);
     void update();
 
     void clear();
@@ -82,6 +83,7 @@ public:
 
     void draw();
     void draw_sprite(const Sprite &sprite);
+    void draw_text(const Text &text);
 };
 
 }; // namespace GL

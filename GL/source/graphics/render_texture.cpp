@@ -30,4 +30,9 @@ void RenderTexture::draw_sprite(const Sprite &sprite)
     sf::RenderTexture::draw(sprite);
 }
 
+void RenderTexture::draw_text(const Text &text)
+{
+    sf::RenderTexture::draw(text);
+}
+
 }; // namespace GL

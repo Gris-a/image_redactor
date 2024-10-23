@@ -30,7 +30,7 @@ void Button::on_press()
 
 void Button::on_hold()
 {
-    for(auto &action: press_actions_) (*action)();
+    for(auto &action: hold_actions_) (*action)();
 }
 
 void Button::on_release()
@@ -51,11 +51,11 @@ void Button::update(const Event &event, BaseWindow &base_window)
             {
                 return;
             }
-            case State::PRESSED:
+            case State::PRESSED: // fall through
             {
                 on_release();
             }
-            case State::HOVERED:
+            case State::HOVERED: // fall through
             {
                 on_unhover();
                 state_ = State::DEFAULT;
@@ -119,6 +119,11 @@ void Button::add_unhover_action(std::unique_ptr<Action> &&action)
 void Button::add_press_action(std::unique_ptr<Action> &&action)
 {
     add_action(press_actions_, std::move(action));
+}
+
+void Button::add_hold_action(std::unique_ptr<Action> &&action)
+{
+    add_action(hold_actions_, std::move(action));
 }
 
 void Button::add_release_action(std::unique_ptr<Action> &&action)

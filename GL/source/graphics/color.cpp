@@ -3,26 +3,35 @@
 namespace GL
 {
 
-Color::Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha): red_(red), green_(green), blue_(blue), alpha_(alpha) {}
-
-uint8_t Color::red()   const {return red_;}
-uint8_t Color::green() const {return green_;}
-uint8_t Color::blue()  const {return blue_;}
-uint8_t Color::alpha() const {return alpha_;}
+Color::Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha): components_{red, green, blue, alpha} {}
+Color::Color(const Color &color): color_(color.color_) {}
+Color::Color(uint32_t color): color_(color) {}
 
 
-void Color::set_red(uint8_t red)     {red_   = red;}
-void Color::set_green(uint8_t green) {green_ = green;}
-void Color::set_blue(uint8_t blue)   {blue_  = blue;}
-void Color::set_alpha(uint8_t alpha) {alpha_ = alpha;}
+uint8_t Color::red()   const {return components_.red;}
+uint8_t Color::green() const {return components_.green;}
+uint8_t Color::blue()  const {return components_.blue;}
+uint8_t Color::alpha() const {return components_.alpha;}
+
+
+void Color::set_red(uint8_t red)     {components_.red   = red;}
+void Color::set_green(uint8_t green) {components_.green = green;}
+void Color::set_blue(uint8_t blue)   {components_.blue  = blue;}
+void Color::set_alpha(uint8_t alpha) {components_.alpha = alpha;}
+
+
+Color::operator uint32_t() const
+{
+    return color_;
+}
 
 
 Color &Color::operator +=(const Color &diff)
 {
-    red_   = std::min(COLOR_MAX, static_cast<unsigned>(red_   + diff.red_));
-    green_ = std::min(COLOR_MAX, static_cast<unsigned>(green_ + diff.green_));
-    blue_  = std::min(COLOR_MAX, static_cast<unsigned>(blue_  + diff.blue_));
-    alpha_ = std::max(alpha_, diff.alpha_);
+    components_.red   = std::min(COLOR_MAX, static_cast<unsigned>(components_.red   + diff.components_.red));
+    components_.green = std::min(COLOR_MAX, static_cast<unsigned>(components_.green + diff.components_.green));
+    components_.blue  = std::min(COLOR_MAX, static_cast<unsigned>(components_.blue  + diff.components_.blue));
+    components_.alpha = std::max(components_.alpha, diff.components_.alpha);
 
     return *this;
 }
@@ -30,9 +39,9 @@ Color &Color::operator +=(const Color &diff)
 
 Color &Color::operator *=(double scale)
 {
-    red_   = std::min(COLOR_MAX, static_cast<unsigned>(red_   * scale));
-    green_ = std::min(COLOR_MAX, static_cast<unsigned>(green_ * scale));
-    blue_  = std::min(COLOR_MAX, static_cast<unsigned>(blue_  * scale));
+    components_.red   = std::min(COLOR_MAX, static_cast<unsigned>(components_.red   * scale));
+    components_.green = std::min(COLOR_MAX, static_cast<unsigned>(components_.green * scale));
+    components_.blue  = std::min(COLOR_MAX, static_cast<unsigned>(components_.blue  * scale));
 
     return *this;
 }

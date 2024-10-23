@@ -15,11 +15,24 @@ public:
     static const unsigned COLOR_MAX = 255;
 
 private:
-    uint8_t red_ = 0, green_ = 0, blue_ = 0, alpha_ = COLOR_MAX;
+    struct Components
+    {
+        uint8_t red   = 0;
+        uint8_t green = 0;
+        uint8_t blue  = 0;
+        uint8_t alpha = COLOR_MAX;
+    };
+    union
+    {
+        Components components_;
+        uint32_t color_;
+    };
 
 public:
     Color() = default;
     Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
+    Color(const Color &color);
+    Color(uint32_t color);
 
     uint8_t red()   const;
     uint8_t green() const;
@@ -31,6 +44,7 @@ public:
     void set_blue(uint8_t blue);
     void set_alpha(uint8_t alpha);
 
+    operator uint32_t() const;
 
     Color &operator +=(const Color &diff);
 

@@ -85,4 +85,9 @@ void BaseWindow::draw_sprite(const Sprite &sprite)
     sf::RenderWindow::draw(sprite);
 }
 
+void BaseWindow::draw_text(const Text &text)
+{
+    sf::RenderWindow::draw(text);
+}
+
 }; // namespace GL
