@@ -8,5 +8,3 @@
 #include "include/graphics/render.hpp"
 #include "include/graphics/vector.hpp"
 #include "include/graphics/window.hpp"
-
-#include "include/gui/button.hpp"

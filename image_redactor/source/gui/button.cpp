@@ -1,6 +1,6 @@
 #include "../../include/gui/button.hpp"
 
-#include "../../include/events/event.hpp"
+#include "../../../GL/include/events/event.hpp"
 
 namespace GL
 {

@@ -1,6 +1,6 @@
 #include "../../include/gui/button.hpp"
 
-#include "../../include/events/mouse.hpp"
+#include "../../../GL/include/events/mouse.hpp"
 
 namespace GL
 {

@@ -7,9 +7,9 @@
 #include "SFML/Window.hpp"
 #include "SFML/System.hpp"
 
-#include "../graphics/render.hpp"
-#include "../graphics/vector.hpp"
-#include "../graphics/window.hpp"
+#include "../../../GL/include/graphics/render.hpp"
+#include "../../../GL/include/graphics/vector.hpp"
+#include "../../../GL/include/graphics/window.hpp"
 
 namespace GL
 {
