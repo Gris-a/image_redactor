@@ -27,6 +27,10 @@ public:
         NONE
     };
 
+private:
+    EventType type_ = EventType::NONE;
+
+public:
     class KeyEvent
     {
         friend class Event;

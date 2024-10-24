@@ -2,10 +2,8 @@
 
 #include "../../../GL/include/events/event.hpp"
 
-namespace GL
-{
 
-Button::Button(const Dot2d &pos, const Vector2d &size): Window(pos, size) {}
+Button::Button(const GL::Dot2d &pos, const GL::Vector2d &size): Window(pos, size) {}
 
 
 void Button::on_default()
@@ -39,7 +37,7 @@ void Button::on_release()
 }
 
 
-void Button::update(const Event &event, BaseWindow &base_window)
+void Button::update(const GL::Event &event, GL::BaseWindow &base_window)
 {
     on_default();
 
@@ -66,25 +64,25 @@ void Button::update(const Event &event, BaseWindow &base_window)
 
     switch(event.type())
     {
-        case Event::EventType::MOUSE_MOVED:
+        case GL::Event::EventType::MOUSE_MOVED:
         {
             if(state_ == State::DEFAULT) on_hover();
             state_ = State::HOVERED;
 
             return;
         }
-        case Event::EventType::MB_PRESSED:
+        case GL::Event::EventType::MB_PRESSED:
         {
-            if(event.mouse_button().button != Mouse::Button::LEFT) return;
+            if(event.mouse_button().button != GL::Mouse::Button::LEFT) return;
 
             (state_ == State::PRESSED) ? on_hold() : on_press();
             state_ = State::PRESSED;
 
             return;
         }
-        case Event::EventType::MB_RELEASED:
+        case GL::Event::EventType::MB_RELEASED:
         {
-            if(event.mouse_button().button != Mouse::Button::LEFT) return;
+            if(event.mouse_button().button != GL::Mouse::Button::LEFT) return;
 
             on_release();
             state_ = State::HOVERED;
@@ -130,5 +128,3 @@ void Button::add_release_action(std::unique_ptr<Action> &&action)
 {
     add_action(release_actions_, std::move(action));
 }
-
-}; // namespace GL

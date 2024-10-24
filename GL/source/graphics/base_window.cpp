@@ -51,18 +51,30 @@ bool BaseWindow::poll_event(Event &event)
 {
     while(sf::RenderWindow::pollEvent(event))
     {
-        if(event.type() != Event::EventType::NONE)
+        switch(event.sf::Event::type)
         {
-            return true;
+            case sf::Event::Closed:
+                event.type_ = Event::EventType::CLOSED;
+                return true;
+            case sf::Event::MouseMoved:
+                event.type_ = Event::EventType::MOUSE_MOVED;
+                return true;
+            case sf::Event::MouseButtonPressed:
+                event.type_ = Event::EventType::MB_PRESSED;
+                return true;
+            case sf::Event::MouseButtonReleased:
+                event.type_ = Event::EventType::MB_RELEASED;
+                return true;
+            default:
+                event.type_ = Event::EventType::NONE;
         }
     }
+
     return false;
 }
 
 void BaseWindow::update()
 {
-    if(!is_active_) return;
-
     Event event;
     while(poll_event(event))
     {

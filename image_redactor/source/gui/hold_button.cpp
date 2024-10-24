@@ -1,9 +1,7 @@
 #include "../../include/gui/button.hpp"
 
-namespace GL
-{
 
-HoldButton::HoldButton(const Dot2d &pos, const Vector2d &size): Button(pos, size) {}
+HoldButton::HoldButton(const GL::Dot2d &pos, const GL::Vector2d &size): Button(pos, size) {}
 
 
 void HoldButton::on_hold()
@@ -16,5 +14,3 @@ void HoldButton::on_hold()
     for(auto &action: hold_actions_) (*action)();
     time_ = now;
 }
-
-}; // namespace GL

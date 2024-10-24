@@ -3,18 +3,14 @@
 #include <memory>
 #include <chrono>
 
-#include "SFML/Graphics.hpp"
-#include "SFML/Window.hpp"
-#include "SFML/System.hpp"
-
 #include "../../../GL/include/graphics/render.hpp"
 #include "../../../GL/include/graphics/vector.hpp"
 #include "../../../GL/include/graphics/window.hpp"
 
 namespace GL
 {
-
 class Event;
+}; // namespace GL
 
 class Action
 {
@@ -23,7 +19,7 @@ public:
     virtual void operator()() = 0;
 };
 
-class Button: public Window
+class Button: public GL::Window
 {
 public:
     enum class State
@@ -50,15 +46,15 @@ protected:
     virtual void on_release();
     virtual void on_hold();
 
-    virtual void draw(BaseWindow &base_window) = 0;
-    virtual void update(const Event &event, BaseWindow &base_window) override;
+    virtual void draw(GL::BaseWindow &base_window) = 0;
+    virtual void update(const GL::Event &event, GL::BaseWindow &base_window) override;
 
-    virtual bool is_hovered(BaseWindow &base_window) = 0;
+    virtual bool is_hovered(GL::BaseWindow &base_window) = 0;
 
     void add_action(std::vector<std::unique_ptr<Action>> &actions, std::unique_ptr<Action> &&action);
 
 public:
-    Button(const Dot2d &pos, const Vector2d &size);
+    Button(const GL::Dot2d &pos, const GL::Vector2d &size);
     virtual ~Button() {}
 
 
@@ -80,7 +76,7 @@ protected:
     virtual void on_hold() override;
 
 public:
-    HoldButton(const Dot2d &pos, const Vector2d &size);
+    HoldButton(const GL::Dot2d &pos, const GL::Vector2d &size);
 };
 
 
@@ -92,7 +88,7 @@ protected:
     virtual void on_release() override;
 
 public:
-    ActivationButton(const Dot2d &pos, const Vector2d &size);
+    ActivationButton(const GL::Dot2d &pos, const GL::Vector2d &size);
 
     bool is_active() const;
 };
@@ -101,32 +97,30 @@ public:
 class BasicHoldButton: public HoldButton
 {
 protected:
-    std::shared_ptr<const Texture> default_texture_;
-    std::shared_ptr<const Texture> hovered_texture_;
-    std::shared_ptr<const Texture> pressed_texture_;
+    std::shared_ptr<const GL::Texture> default_texture_;
+    std::shared_ptr<const GL::Texture> hovered_texture_;
+    std::shared_ptr<const GL::Texture> pressed_texture_;
 
-    virtual void draw(BaseWindow &base_window) override;
-    virtual bool is_hovered(BaseWindow &base_window) override;
+    virtual void draw(GL::BaseWindow &base_window) override;
+    virtual bool is_hovered(GL::BaseWindow &base_window) override;
 
 public:
-    BasicHoldButton(const Dot2d &pos, const Vector2d &size,
-                    std::shared_ptr<const Texture> &default_texture, std::shared_ptr<const Texture> &hovered_texture, std::shared_ptr<const Texture> &pressed_texture);
+    BasicHoldButton(const GL::Dot2d &pos, const GL::Vector2d &size,
+                    std::shared_ptr<const GL::Texture> &default_texture, std::shared_ptr<const GL::Texture> &hovered_texture, std::shared_ptr<const GL::Texture> &pressed_texture);
 };
 
 
 class BasicActivationButton: public ActivationButton
 {
 protected:
-    std::shared_ptr<const Texture> default_texture_;
-    std::shared_ptr<const Texture> hovered_texture_;
-    std::shared_ptr<const Texture> pressed_texture_;
+    std::shared_ptr<const GL::Texture> default_texture_;
+    std::shared_ptr<const GL::Texture> hovered_texture_;
+    std::shared_ptr<const GL::Texture> pressed_texture_;
 
-    virtual void draw(BaseWindow &base_window) override;
-    virtual bool is_hovered(BaseWindow &base_window) override;
+    virtual void draw(GL::BaseWindow &base_window) override;
+    virtual bool is_hovered(GL::BaseWindow &base_window) override;
 
 public:
-    BasicActivationButton(const Dot2d &pos, const Vector2d &size,
-                          std::shared_ptr<const Texture> &default_texture, std::shared_ptr<const Texture> &hovered_texture, std::shared_ptr<const Texture> &pressed_texture);
+    BasicActivationButton(const GL::Dot2d &pos, const GL::Vector2d &size,
+                          std::shared_ptr<const GL::Texture> &default_texture, std::shared_ptr<const GL::Texture> &hovered_texture, std::shared_ptr<const GL::Texture> &pressed_texture);
 };
-
-}; // namespace GL
